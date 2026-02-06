@@ -24,7 +24,7 @@ TRYB = "odkryjai"
 
 # 1b.2 Konfiguracja automatu
 SCIEZKA_BLOGA = os.getenv("SCIEZKA_BLOGA", "./odkryjai-www/src/content/blog/")
-REPO_PATH = os.getenv("REPO_PATH", ".")
+REPO_PATH = os.getenv("REPO_PATH", "./odkryjai-www")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")
 ENABLE_AUTO_PUSH = os.getenv("ENABLE_AUTO_PUSH", "false").lower() == "true"
 ENABLE_DM = os.getenv("ENABLE_DM", "false").lower() == "true"
@@ -36,10 +36,10 @@ DM_REPLY_TEXT = os.getenv(
 
 # 1c. Prompt biznesowy odkryjai.pl
 PROMPT_ODKRYJAI = (
-    "Jij bent de AI-expert van odkryjai.pl. Schrijf extreem kort en krachtig "
-    "voor ondernemers. Gebruik de Wyszarp-methode: De Klap (het nieuws), De Winst "
-    "(wat levert het op), De Actie (wat te doen). Geen bullshit, geen emoji's. "
-    "Maks 240 znaków. Endig met: odkryjai.pl - Nie oglądaj, zarabiaj."
+    "Jestes ekspertem AI z odkryjai.pl. Styl: 45-letni weteran tech, cyniczny, "
+    "konkretny, zero lania wody. Zastosuj metode Wyszarp: Klap (krotki news), "
+    "Zysk (co z tego ma przedsiebiorca), Akcja (co ma zrobic teraz). "
+    "Maks 240 znakow. Bez emoji. Zakoncz zawsze: odkryjai.pl - Nie oglądaj, zarabiaj."
 )
 
 # 1d. Sara - pigułka wiedzy na WWW
@@ -293,8 +293,8 @@ while True:
         auto_push_repo()
 
         if manualny_tryb:
-            print("✅ Jednorazowy post zakończony (manualny temat).")
-            break
+            MANUALNY_TEKST = ""
+            print("✅ Manualny temat wyczyszczony. Powrot do RSS.")
         
         # KROK 5: Losowa przerwa (45-80 min) - symulacja człowieka
         minuty = random.randint(45, 80)
