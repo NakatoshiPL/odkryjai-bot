@@ -32,6 +32,7 @@ jobs:
           REPO_PATH: .
           ENABLE_DM: "false"
           ENABLE_AUTO_PUSH: "true"
+          RUN_ONCE: "true"
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           X_DM_REPLY_TEXT: "Nie oglądaj – zarabiaj. Wejdź na odkryjai.pl i zgarnij darmowy lead magnet!"
         run: python main.py

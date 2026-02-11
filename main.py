@@ -28,6 +28,7 @@ REPO_PATH = os.getenv("REPO_PATH", "./odkryjai-www")
 GH_TOKEN = os.getenv("GH_TOKEN", "")
 ENABLE_AUTO_PUSH = os.getenv("ENABLE_AUTO_PUSH", "false").lower() == "true"
 ENABLE_DM = os.getenv("ENABLE_DM", "false").lower() == "true"
+RUN_ONCE = os.getenv("RUN_ONCE", "false").lower() == "true"
 X_USER_ACCESS_TOKEN = os.getenv("X_USER_ACCESS_TOKEN", "")
 DM_REPLY_TEXT = os.getenv(
     "X_DM_REPLY_TEXT",
@@ -278,6 +279,7 @@ while True:
 
         # KROK 4: Publikacja na X
         publikuj_na_x(marek_txt)
+        print("✅ POST WYSŁANY")
 
         # KROK 4b: DM (opcjonalnie)
         odpowiedz_na_dm()
@@ -291,6 +293,10 @@ while True:
 
         # KROK 4d: Auto-push do repo (opcjonalnie)
         auto_push_repo()
+
+        if RUN_ONCE:
+            print("✅ RUN_ONCE: zakonczono po jednym cyklu.")
+            break
 
         if manualny_tryb:
             MANUALNY_TEKST = ""
