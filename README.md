@@ -8,7 +8,7 @@ odkryjai.pl.
 1. W repozytorium GitHuba dodaj sekrety (Settings -> Secrets and variables -> Actions):
    - `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`
    - `X_BEARER_TOKEN`, `X_CLIENT_ID`, `X_CLIENT_SECRET`, `X_USER_ACCESS_TOKEN`
-   - `KEY_ODKRYJAI`, `GITHUB_TOKEN`
+   - `KEY_ODKRYJAI`, `GH_TOKEN`
 2. Dodaj zmienne (Settings -> Secrets and variables -> Actions -> Variables):
    - `SCIEZKA_BLOGA` (domyslnie `./odkryjai-www/src/content/blog/`)
    - `ENABLE_DM` oraz `ENABLE_AUTO_PUSH` (`true`/`false`)
@@ -17,7 +17,7 @@ odkryjai.pl.
 ## Auto-push do repo www
 
 Bot zapisuje pigułki do `./odkryjai-www/src/content/blog/` i robi push
-z uzyciem `GITHUB_TOKEN`. Upewnij sie, ze token ma uprawnienia
+z uzyciem `GH_TOKEN`. Upewnij sie, ze token ma uprawnienia
 `contents: write` w repozytorium `Nakatoshi`.
 
 ## Lokalnie

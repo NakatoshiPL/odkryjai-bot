@@ -25,7 +25,7 @@ TRYB = "odkryjai"
 # 1b.2 Konfiguracja automatu
 SCIEZKA_BLOGA = os.getenv("SCIEZKA_BLOGA", "./odkryjai-www/src/content/blog/")
 REPO_PATH = os.getenv("REPO_PATH", "./odkryjai-www")
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")
+GH_TOKEN = os.getenv("GH_TOKEN", "")
 ENABLE_AUTO_PUSH = os.getenv("ENABLE_AUTO_PUSH", "false").lower() == "true"
 ENABLE_DM = os.getenv("ENABLE_DM", "false").lower() == "true"
 X_USER_ACCESS_TOKEN = os.getenv("X_USER_ACCESS_TOKEN", "")
@@ -237,10 +237,10 @@ def auto_push_repo():
         return
 
     remote = os.getenv("GIT_REMOTE", "origin")
-    if GITHUB_TOKEN:
+    if GH_TOKEN:
         url = run_git(["remote", "get-url", remote]).stdout.strip()
         if url.startswith("https://"):
-            safe_url = url.replace("https://", f"https://x-access-token:{GITHUB_TOKEN}@")
+            safe_url = url.replace("https://", f"https://x-access-token:{GH_TOKEN}@")
             run_git(["push", safe_url, "HEAD"])
             print("✅ Auto-push: wyslano z tokenem.")
             return
