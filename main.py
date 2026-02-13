@@ -308,5 +308,9 @@ while True:
         time.sleep(minuty * 60)
 
     except Exception as e:
-        print(f"⚠️ Awaria: {e}. Reset za 5 minut.")
+        print(f"⚠️ Awaria: {e}.")
+        if RUN_ONCE:
+            print("RUN_ONCE: koniec po błędzie (bez pętli retry).")
+            raise
+        print("Reset za 5 minut...")
         time.sleep(300)
