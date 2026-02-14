@@ -11,6 +11,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Checkout website repo
+        uses: actions/checkout@v3
+        with:
+          repository: NakatoshiPL/odkryjai-pl
+          path: odkryjai-pl
+          token: ${{ secrets.GH_TOKEN }}
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -29,8 +36,8 @@ jobs:
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           X_USER_ACCESS_TOKEN: ${{ secrets.X_USER_ACCESS_TOKEN }}
-          SCIEZKA_BLOGA: ./odkryjai-www/src/content/blog/
-          REPO_PATH: .
+          SCIEZKA_BLOGA: ./odkryjai-pl/src/content/blog/
+          REPO_PATH: ./odkryjai-pl
           ENABLE_DM: "false"
           ENABLE_AUTO_PUSH: "true"
           RUN_ONCE: "true"

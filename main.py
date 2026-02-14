@@ -95,7 +95,7 @@ def wyszarp_konkrety():
 
 # 4. Marek - Agresywny filtr na durnoty
 def stworz_post_marka(klucz_env, trendy, dodaj_link):
-    api_key = os.getenv(klucz_env)
+    api_key = os.getenv(klucz_env, "").strip()
     client = OpenAI(api_key=api_key)
     
     # Reklama pojawia się rzadziej, żeby nie spamować
@@ -119,7 +119,7 @@ def stworz_post_marka(klucz_env, trendy, dodaj_link):
 
 # 4b. Prompt biznesowy dla odkryjai.pl
 def stworz_post_odkryjai(klucz_env, tekst_zrodlowy):
-    api_key = os.getenv(klucz_env)
+    api_key = os.getenv(klucz_env, "").strip()
     client = OpenAI(api_key=api_key)
 
     response = client.chat.completions.create(
@@ -132,7 +132,7 @@ def stworz_post_odkryjai(klucz_env, tekst_zrodlowy):
     return response.choices[0].message.content
 
 def stworz_pigulke_sary(klucz_env, tekst_zrodlowy):
-    api_key = os.getenv(klucz_env)
+    api_key = os.getenv(klucz_env, "").strip()
     client = OpenAI(api_key=api_key)
 
     response = client.chat.completions.create(
