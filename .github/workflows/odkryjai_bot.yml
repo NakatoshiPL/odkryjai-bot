@@ -8,31 +8,40 @@ jobs:
   run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout bot repo
+        uses: actions/checkout@v4
 
       - name: Checkout website repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: NakatoshiPL/odkryjai-pl
           path: odkryjai-pl
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install tweepy requests beautifulsoup4 openai python-dotenv
+        run: pip install -r requirements.txt
 
-      - name: Configure git user
+      - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Debug - check secrets exist
+        run: |
+          echo "X_API_KEY set: ${{ secrets.X_API_KEY != '' }}"
+          echo "X_API_SECRET set: ${{ secrets.X_API_SECRET != '' }}"
+          echo "X_ACCESS_TOKEN set: ${{ secrets.X_ACCESS_TOKEN != '' }}"
+          echo "X_ACCESS_SECRET set: ${{ secrets.X_ACCESS_SECRET != '' }}"
+          echo "KEY_ODKRYJAI set: ${{ secrets.KEY_ODKRYJAI != '' }}"
+          echo "GH_TOKEN set: ${{ secrets.GH_TOKEN != '' }}"
+
       - name: Run bot
-        timeout-minutes: 30
+        timeout-minutes: 10
         env:
           KEY_ODKRYJAI: ${{ secrets.KEY_ODKRYJAI }}
           X_API_KEY: ${{ secrets.X_API_KEY }}
@@ -40,12 +49,10 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
-          X_USER_ACCESS_TOKEN: ${{ secrets.X_USER_ACCESS_TOKEN }}
           SCIEZKA_BLOGA: ./odkryjai-pl/src/content/blog/
           REPO_PATH: ./odkryjai-pl
           ENABLE_DM: "false"
           ENABLE_AUTO_PUSH: "true"
           RUN_ONCE: "true"
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          X_DM_REPLY_TEXT: "Nie oglądaj – zarabiaj. Wejdź na odkryjai.pl i zgarnij darmowy lead magnet!"
         run: python main.py
